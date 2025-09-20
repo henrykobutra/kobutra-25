@@ -19,6 +19,9 @@ trigger: always_on
 - Use path aliases (`@/*`) for consistent import paths
 - Generate and maintain Supabase types from schema
 
+## Accessibility
+- Code shall be WACG 2.1 compliant
+
 ## Component Architecture Rules
 - Follow Single Responsibility Principle - one clear purpose per component
 - Separate Smart (Container) vs Dumb (Presentational) components:
