@@ -1,0 +1,35 @@
+{
+  "maxLines": 200,
+  "include": {
+    "extensions": [".ts", ".tsx", ".js", ".jsx", ".py", ".css", ".scss", ".md"]
+  },
+  "exclude": {
+    "dirs": [
+      "node_modules",
+      ".git",
+      ".next",
+      "dist",
+      "build",
+      "coverage",
+      ".nyc_output",
+      "components/ui",
+      "tests",
+      "docs",
+      "scripts"
+    ],
+    "files": [
+      "CLAUDE.md",
+      "WARP.md",
+      "README.md"
+    ],
+    "patterns": [
+      ".*\\.test\\.(ts|tsx|js|jsx)$",
+      ".*\\.spec\\.(ts|tsx|js|jsx)$",
+      ".*\\.d\\.ts$",
+      ".*\\.min\\.(js|css)$",
+      "^\\..*",
+      ".*\\.lock$",
+      ".*\\.sql$"
+    ]
+  }
+}
