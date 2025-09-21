@@ -42,25 +42,35 @@ export default function BottomNavigation() {
   const router = useRouter()
 
   const getActiveItem = () => {
+    console.log('Current pathname:', pathname) // Debug log
+    
     // Handle exact path matches first
     const exactMatch = navigationItems.find(item => item.path === pathname)
     if (exactMatch) {
+      console.log('Exact match found:', exactMatch.id) // Debug log
       return exactMatch.id
     }
 
     // Handle path-based matching for nested routes
     if (pathname.startsWith("/notes")) {
+      console.log('Notes path detected') // Debug log
       return "notes"
     }
     if (pathname.startsWith("/sides")) {
+      console.log('Sides path detected') // Debug log
       return "sides"
     }
 
     // Default to home for root path or any unmatched path
+    console.log('Defaulting to home') // Debug log
     return "home"
   }
 
   const activeItemId = getActiveItem()
+  const activeIndex = navigationItems.findIndex(item => item.id === activeItemId)
+  console.log('Active item ID:', activeItemId) // Debug log
+  console.log('Active index:', activeIndex) // Debug log
+  console.log('Animation X position:', activeIndex * 82) // Debug log
 
 
   return (
@@ -93,7 +103,7 @@ export default function BottomNavigation() {
                 boxShadow: 'inset 0 1px 3px rgba(255,255,255,0.3), 0 4px 12px rgba(255,79,0,0.3)'
               }}
               animate={{
-                x: navigationItems.findIndex(item => item.id === activeItemId) * 82,
+                x: activeIndex * 82,
                 width: 82
               }}
               transition={{
@@ -101,7 +111,7 @@ export default function BottomNavigation() {
                 stiffness: 400,
                 damping: 30
               }}
-              layoutId="activeTab"
+              layoutId="activeIndicator"
             />
 
             {navigationItems.map((item, index) => {
