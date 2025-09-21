@@ -52,7 +52,7 @@ const certifications: CertificationBadge[] = [
 export default function CertificationBadges() {
   return (
     <div>
-      <h3 className="text-lg font-light mb-4">Selected Certifications</h3>
+      <h3 className="text-lg font-light mb-4">Some Certifications</h3>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {certifications.map((cert, index) => (
           <div
@@ -89,6 +89,11 @@ export default function CertificationBadges() {
           </div>
         ))}
       </div>
+
+      {/* Subtle snarky text */}
+      <p className="text-xs text-gray-500 mt-4 italic">
+        I also have other certs like CompTIA A+, Network+, Linux Essentials... but who's counting?
+      </p>
     </div>
   );
 }
