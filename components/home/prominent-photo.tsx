@@ -17,9 +17,9 @@ export default function ProminentPhoto({ src, alt, caption }: ProminentPhotoProp
     offset: ["start end", "end start"]
   });
 
-  // Parallax transforms
-  const y = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+  // Parallax transforms - reduced movement range to prevent gaps
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.05]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
 
   return (
@@ -37,19 +37,21 @@ export default function ProminentPhoto({ src, alt, caption }: ProminentPhotoProp
           }}
           style={{ opacity }}
         >
-          <motion.div
-            style={{ y, scale }}
-            className="w-full h-80 md:h-96 lg:h-[32rem] relative"
-          >
-            <Image
-              src={src}
-              alt={alt}
-              width={1200}
-              height={600}
-              className="w-full h-full object-cover"
-              priority={false}
-            />
-          </motion.div>
+          <div className="w-full h-80 md:h-96 lg:h-[32rem] relative overflow-hidden">
+            <motion.div
+              style={{ y, scale }}
+              className="w-full h-[120%] relative -top-[10%]"
+            >
+              <Image
+                src={src}
+                alt={alt}
+                width={1200}
+                height={600}
+                className="w-full h-full object-cover"
+                priority={false}
+              />
+            </motion.div>
+          </div>
           <motion.div
             className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"
             initial={{ opacity: 0.5 }}
