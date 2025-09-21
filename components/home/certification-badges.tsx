@@ -52,7 +52,7 @@ const certifications: CertificationBadge[] = [
 export default function CertificationBadges() {
   return (
     <div>
-      <h3 className="text-lg font-light mb-4">Certifications</h3>
+      <h3 className="text-lg font-light mb-4">Selected Certifications</h3>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {certifications.map((cert, index) => (
           <div
