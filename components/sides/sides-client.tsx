@@ -25,15 +25,47 @@ const itemVariants = {
   }
 };
 
-// Sample project items - replace with actual projects
-const projectItems = [
+interface SideProject {
+  name: string;
+  description: string;
+  status: 'building' | 'exploring' | 'planning';
+}
+
+const sideProjects: SideProject[] = [
   {
-    title: "Coming Soon",
-    status: "Planning",
-    description: "This section will showcase side projects, technical experiments, and creative coding endeavors.",
-    tags: ["React", "Next.js", "TypeScript"]
+    name: "Resumo",
+    description: "AI resume generator evolving into a comprehensive career coach. Taking on LinkedIn with tools for job seekers, interview prep, and career guidance.",
+    status: "building"
+  },
+  {
+    name: "LOC Checker",
+    description: "Open-source package for maintaining codebases under 200 lines per file. Currently using personal scripts, planning public release.",
+    status: "planning"
+  },
+  {
+    name: "CRM Platform",
+    description: "Building a better WordPress alternative. Reimagining how content management should work in the modern web ecosystem.",
+    status: "exploring"
+  },
+  {
+    name: "Spa Software",
+    description: "Next-generation spa management platform. Improving on Square's booking system with modern UX and comprehensive business tools.",
+    status: "exploring"
   }
 ];
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'building':
+      return 'text-green-600';
+    case 'exploring':
+      return 'text-blue-600';
+    case 'planning':
+      return 'text-orange-600';
+    default:
+      return 'text-muted-foreground';
+  }
+};
 
 /**
  * Client-side sides page component with animations
@@ -47,7 +79,7 @@ export default function SidesClient() {
       initial="hidden"
       animate="visible"
     >
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="max-w-2xl mx-auto px-4">
         <motion.div
           variants={itemVariants}
           className="mb-16"
@@ -55,42 +87,58 @@ export default function SidesClient() {
           <h1 className="text-3xl md:text-4xl font-light mb-6">
             Side Projects
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            A collection of experiments, prototypes, and passion projects. These represent my exploration of new technologies, creative solutions, and continuous learning journey.
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
+            While actively working on Redii, I spend most of my spare time exploring the intersection between AI and Enterprise through these ventures:
           </p>
         </motion.div>
 
-        <motion.div 
-          className="grid gap-8 md:grid-cols-2"
+        <motion.div
+          className="space-y-8"
           variants={containerVariants}
         >
-          {projectItems.map((project, index) => (
+          {sideProjects.map((project, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="border rounded-lg p-6 hover:shadow-md transition-shadow"
+              whileHover={{
+                x: 8,
+                transition: { 
+                  type: "spring", 
+                  stiffness: 400, 
+                  damping: 25 
+                }
+              }}
+              className="group"
             >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-medium">{project.title}</h2>
-                  <span className="text-xs px-2 py-1 bg-muted rounded-full">
-                    {project.status}
-                  </span>
-                </div>
-                
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="text-xs px-2 py-1 bg-secondary text-secondary-foreground rounded"
+              <div className="flex items-start gap-4">
+                <motion.span 
+                  className="text-sm font-mono text-muted-foreground/60 min-w-[2ch] mt-1"
+                  whileHover={{
+                    scale: 1.1,
+                    color: "rgb(var(--primary))",
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </motion.span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <motion.h3 
+                      className="text-lg font-medium text-foreground"
+                      whileHover={{
+                        color: "rgb(var(--primary))",
+                        transition: { duration: 0.2 }
+                      }}
                     >
-                      {tag}
+                      {project.name}
+                    </motion.h3>
+                    <span className={`text-xs font-medium ${getStatusColor(project.status)}`}>
+                      {project.status}
                     </span>
-                  ))}
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
               </div>
             </motion.div>

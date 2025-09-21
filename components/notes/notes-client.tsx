@@ -25,13 +25,19 @@ const itemVariants = {
   }
 };
 
-// Sample note items - replace with actual content
+// Actual note items from development journey
 const noteItems = [
-  {
-    title: "Coming Soon",
-    date: "2024",
-    preview: "This section will contain technical notes, insights, and observations from my development journey."
-  }
+  "The 200-Line Rule: Keeping Components Focused",
+  "Vibe Coding Philosophy: Quality Over Quantity", 
+  "Automated Quality Gates: My Development Pipeline",
+  "Shadcn Extensions: Beyond the Basics",
+  "MCP Integrations: Supercharging Development Workflow",
+  "Supabase MCP: Direct Database Access for AI Assistants",
+  "Linear MCP: The Ultimate Project Management Integration",
+  "iTerm2 Configuration: Terminal Perfection for Developers",
+  "Claude Code Reviews: AI-Powered Quality Assurance",
+  "macOS Productivity Stack: Stream Deck, Raycast & CleanShot",
+  "AI Coding Trinity: Claude, Windsurf & Warp in Practice"
 ];
 
 /**
@@ -67,16 +73,36 @@ export default function NotesClient() {
             <motion.li
               key={index}
               variants={itemVariants}
-              className="border-l-2 border-muted pl-6"
+              whileHover={{
+                x: 8,
+                transition: { 
+                  type: "spring", 
+                  stiffness: 400, 
+                  damping: 25 
+                }
+              }}
+              className="group"
             >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-medium">{item.title}</h2>
-                  <span className="text-sm text-muted-foreground">{item.date}</span>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {item.preview}
-                </p>
+              <div className="flex items-center gap-4">
+                <motion.span 
+                  className="text-sm font-mono text-muted-foreground/60 min-w-[2ch]"
+                  whileHover={{
+                    scale: 1.1,
+                    color: "rgb(var(--primary))",
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </motion.span>
+                <motion.span 
+                  className="text-lg text-foreground leading-relaxed"
+                  whileHover={{
+                    color: "rgb(var(--primary))",
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  {item}
+                </motion.span>
               </div>
             </motion.li>
           ))}
