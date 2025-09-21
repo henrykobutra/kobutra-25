@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 interface CertificationBadge {
@@ -49,51 +52,124 @@ const certifications: CertificationBadge[] = [
   }
 ];
 
+// Animation variants for staggered badge appearance
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const badgeVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    y: 20
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
 export default function CertificationBadges() {
   return (
     <div>
-      <h3 className="text-lg font-light mb-4">Some Certifications</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+      <motion.h3
+        className="text-lg font-light mb-4"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        Some Certifications
+      </motion.h3>
+
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {certifications.map((cert, index) => (
-          <div
+          <motion.div
             key={index}
-            className="group relative flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+            variants={badgeVariants}
+            whileHover={{
+              scale: 1.05,
+              y: -5,
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="group relative flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
           >
             {/* Badge Image Container */}
-            <div className="relative w-16 h-16 md:w-20 md:h-20 mb-2 flex items-center justify-center">
+            <motion.div
+              className="relative w-16 h-16 md:w-20 md:h-20 mb-2 flex items-center justify-center"
+              whileHover={{ rotate: [0, -5, 5, 0] }}
+              transition={{ duration: 0.6 }}
+            >
               {cert.name !== 'FCC Extra Class (AI5OE)' ? (
                 <Image
                   src={cert.image}
                   alt={cert.alt}
                   width={80}
                   height={80}
-                  className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-200"
+                  className="object-contain w-full h-full transition-transform duration-200"
                 />
               ) : (
                 // Fallback for FCC badge (text-based until image is available)
-                <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                <motion.div
+                  className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                  whileHover={{
+                    backgroundImage: 'linear-gradient(to bottom right, #3b82f6, #1d4ed8, #1e40af)',
+                    transition: { duration: 0.3 }
+                  }}
+                >
                   FCC
-                </div>
+                </motion.div>
               )}
-            </div>
-            
-            {/* Badge Name */}
-            <div className="text-xs text-center text-gray-700 leading-tight">
-              {cert.name}
-            </div>
-            
-            {/* Hover tooltip */}
-            <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-              {cert.alt}
-            </div>
-          </div>
-        ))}
-      </div>
+            </motion.div>
 
-      {/* Subtle snarky text */}
-      <p className="text-xs text-gray-500 mt-4 italic">
+            {/* Badge Name */}
+            <motion.div
+              className="text-xs text-center text-gray-700 leading-tight"
+              whileHover={{ color: '#374151' }}
+            >
+              {cert.name}
+            </motion.div>
+
+            {/* Hover tooltip */}
+            <motion.div
+              className="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10"
+              initial={{ scale: 0.8 }}
+              whileHover={{ scale: 1 }}
+            >
+              {cert.alt}
+            </motion.div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Subtle snarky text with typing animation */}
+      <motion.p
+        className="text-xs text-gray-500 mt-4 italic"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 1, duration: 0.8 }}
+      >
         I also have other certs like CompTIA A+, Network+, Linux Essentials... but who's counting?
-      </p>
+      </motion.p>
     </div>
   );
 }
