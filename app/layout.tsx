@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import BottomNavigation from "@/components/ui/bottom-navigation";
+import BreadcrumbWrapper from "@/components/layout/breadcrumb-wrapper";
 import StructuredData from "@/components/seo/structured-data";
 import PerformanceOptimizer from "@/components/seo/performance-optimizer";
 import SocialProfileSchema from "@/components/seo/social-profile-schema";
@@ -111,6 +112,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <BreadcrumbWrapper />
         {children}
         <BottomNavigation />
       </body>

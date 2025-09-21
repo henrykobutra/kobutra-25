@@ -40,8 +40,6 @@ const config: KnipConfig = {
     'eslint-config-next',
     // TailwindCSS is used via PostCSS plugin and CSS imports
     'tailwindcss',
-    // Framer Motion - keeping for future use
-    'framer-motion',
   ],
 };
 
