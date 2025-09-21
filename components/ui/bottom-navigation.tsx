@@ -28,7 +28,7 @@ export default function BottomNavigation() {
         aberrationIntensity={1.5}
         cornerRadius={24}
         padding="12px 16px"
-        className="backdrop-blur-xl"
+        className="backdrop-blur-xl bg-orange-600/70"
       >
         <nav className="flex items-center gap-2">
           {navigationItems.map((item) => (
