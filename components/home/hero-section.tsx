@@ -64,7 +64,7 @@ const floatingAnimation = {
   transition: {
     duration: 6,
     repeat: Infinity,
-    ease: "easeInOut"
+    repeatType: "reverse" as const
   }
 };
 

@@ -168,7 +168,7 @@ export default function CertificationBadges() {
         viewport={{ once: true }}
         transition={{ delay: 1, duration: 0.8 }}
       >
-        I also have other certs like CompTIA A+, Network+, Linux Essentials... but who's counting?
+        I also have other certs like CompTIA A+, Network+, Linux Essentials... but who&apos;s counting?
       </motion.p>
     </div>
   );
