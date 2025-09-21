@@ -74,12 +74,17 @@ const floatingAnimation = {
  */
 export default function HeroSection() {
   return (
-    <section className="py-16 overflow-visible">
+    <section 
+      className="py-16 overflow-visible" 
+      aria-labelledby="hero-title"
+      role="banner"
+    >
       <div className="max-w-4xl mx-auto px-4 overflow-visible">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           {/* Content - Left Side */}
           <div className="col-span-2">
             <motion.h1
+              id="hero-title"
               className="text-3xl md:text-4xl font-light mb-4"
               variants={titleVariants}
               initial="hidden"

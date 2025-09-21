@@ -39,16 +39,18 @@ const sectionVariants = {
 };
 
 /**
- * Home page component serving as the main landing page for Henry Kobutra's portfolio.
+ * Home page component serving as the main landing page for Henry Kobutra's personal website.
  * Composed of modular sections showcasing professional experience, technical expertise, and contact information.
  */
 export default function Home() {
   return (
-    <motion.div
+    <motion.main
       className="min-h-screen"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      role="main"
+      aria-label="Henry Kobutra's Personal Website"
     >
       <motion.div variants={sectionVariants}>
         <HeroSection />
@@ -98,6 +100,6 @@ export default function Home() {
       >
         <BottomNavigation />
       </motion.div>
-    </motion.div>
+    </motion.main>
   );
 }
