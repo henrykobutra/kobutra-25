@@ -69,15 +69,36 @@ export default function NotesPage() {
             <motion.li
               key={index}
               variants={itemVariants}
-              className="group cursor-pointer"
+              whileHover={{
+                x: 8,
+                transition: { 
+                  type: "spring", 
+                  stiffness: 400, 
+                  damping: 25 
+                }
+              }}
+              className="group"
             >
               <div className="flex items-center gap-4">
-                <span className="text-sm font-mono text-muted-foreground/60 min-w-[2ch]">
+                <motion.span 
+                  className="text-sm font-mono text-muted-foreground/60 min-w-[2ch]"
+                  whileHover={{
+                    scale: 1.1,
+                    color: "rgb(var(--primary))",
+                    transition: { duration: 0.2 }
+                  }}
+                >
                   {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="text-lg text-foreground group-hover:text-primary transition-colors duration-200 leading-relaxed">
+                </motion.span>
+                <motion.span 
+                  className="text-lg text-foreground leading-relaxed"
+                  whileHover={{
+                    color: "rgb(var(--primary))",
+                    transition: { duration: 0.2 }
+                  }}
+                >
                   {item}
-                </span>
+                </motion.span>
               </div>
             </motion.li>
           ))}
