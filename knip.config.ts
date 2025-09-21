@@ -4,12 +4,14 @@ const config: KnipConfig = {
   // Entry points for the application
   entry: [
     'app/**/*.{ts,tsx}',
+    'components/**/*.{ts,tsx}',
     'scripts/**/*.ts',
   ],
   
   // Project files to analyze
   project: [
     'app/**/*.{ts,tsx}',
+    'components/**/*.{ts,tsx}',
     'scripts/**/*.ts',
   ],
 
