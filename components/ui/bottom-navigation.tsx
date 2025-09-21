@@ -35,7 +35,7 @@ export default function BottomNavigation() {
             <button
               key={item.id}
               onClick={() => setActiveItem(item.id)}
-              className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
+              className={`relative px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
                 activeItem === item.id
                   ? "text-white bg-white/20 shadow-lg"
                   : "text-white/70 hover:text-white hover:bg-white/10"
