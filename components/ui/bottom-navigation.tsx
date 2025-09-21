@@ -1,18 +1,19 @@
 "use client"
 
 import { useState } from "react"
+import { IconHome, IconNotes, IconTarget } from "@tabler/icons-react"
 import EnhancedLiquidGlass from "@/components/ui/enhanced-liquid-glass"
 
 interface NavigationItem {
   id: string
   label: string
-  icon?: string
+  icon: React.ComponentType<{ size?: number; className?: string }>
 }
 
 const navigationItems: NavigationItem[] = [
-  { id: "home", label: "Home", icon: "🏠" },
-  { id: "notes", label: "Notes", icon: "📝" },
-  { id: "sides", label: "Sides", icon: "🎯" },
+  { id: "home", label: "Home", icon: IconHome },
+  { id: "notes", label: "Notes", icon: IconNotes },
+  { id: "sides", label: "Sides", icon: IconTarget },
 ]
 
 export default function BottomNavigation() {
@@ -36,13 +37,13 @@ export default function BottomNavigation() {
               onClick={() => setActiveItem(item.id)}
               className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
                 activeItem === item.id
-                  ? "text-white bg-white/20"
+                  ? "text-white bg-white/20 shadow-lg"
                   : "text-white/70 hover:text-white hover:bg-white/10"
               }`}
             >
               <div className="flex items-center gap-2">
-                <span className="text-lg">{item.icon}</span>
-                <span className="text-sm font-medium">{item.label}</span>
+                <item.icon size={18} className="text-current drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]" />
+                <span className="text-sm font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">{item.label}</span>
               </div>
 
               {/* Active indicator */}
