@@ -5,6 +5,7 @@ import TechnicalExpertiseSection from '@/components/home/technical-expertise-sec
 import AboutSection from '@/components/home/about-section';
 import ContactSection from '@/components/home/contact-section';
 import ProminentPhoto from '@/components/home/prominent-photo';
+import BottomNavigation from '@/components/ui/bottom-navigation';
 
 /**
  * Home page component serving as the main landing page for Henry Kobutra's portfolio.
@@ -27,6 +28,9 @@ export default function Home() {
       
       <AboutSection />
       <ContactSection />
+
+      {/* Bottom Navigation */}
+      <BottomNavigation />
     </div>
   );
 }
