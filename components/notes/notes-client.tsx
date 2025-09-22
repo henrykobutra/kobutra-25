@@ -96,35 +96,9 @@ export default function NotesClient({ notes }: NotesClientProps) {
                     >
                       {note.frontmatter.title}
                     </motion.h3>
-                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {note.frontmatter.excerpt}
                     </p>
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground/80">
-                      <span>{note.readingTime} min read</span>
-                      <span>•</span>
-                      <time dateTime={note.frontmatter.date}>
-                        {new Date(note.frontmatter.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </time>
-                      {note.frontmatter.tags.length > 0 && (
-                        <>
-                          <span>•</span>
-                          <div className="flex gap-2">
-                            {note.frontmatter.tags.slice(0, 3).map((tag) => (
-                              <span 
-                                key={tag}
-                                className="px-2 py-1 bg-muted/50 rounded-md text-xs"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </>
-                      )}
-                    </div>
                   </div>
                 </div>
               </Link>

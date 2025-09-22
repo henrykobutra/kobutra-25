@@ -44,7 +44,6 @@ function getNoteFiles(): string[] {
       .filter(file => file.endsWith('.md') && file !== 'README.md')
       .map(file => path.join(NOTES_DIRECTORY, file));
     
-    console.log(`Found ${files.length} note files:`, files.map(f => path.basename(f)));
     return files;
   } catch (error) {
     console.error('Error reading notes directory:', error);
