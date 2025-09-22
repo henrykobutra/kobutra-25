@@ -1,10 +1,15 @@
 import { MetadataRoute } from 'next';
+import { getAllNotes } from '@/lib/notes/markdown-processor';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://kobutra.com';
   const currentDate = new Date();
 
-  return [
+  // Get all notes for dynamic sitemap generation
+  const notes = await getAllNotes();
+
+  // Base pages
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: currentDate,
@@ -29,4 +34,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
   ];
+
+  // Dynamic note pages
+  const notePages: MetadataRoute.Sitemap = notes.map((note) => ({
+    url: `${baseUrl}/notes/${note.frontmatter.slug}`,
+    lastModified: new Date(note.frontmatter.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...notePages];
 }
