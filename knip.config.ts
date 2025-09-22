@@ -44,8 +44,6 @@ const config: KnipConfig = {
     'tailwindcss',
     // Markdown processing dependencies used in lib/notes
     '@types/hast',
-    // Shiki is used through @shikijs/rehype plugin
-    'shiki',
   ],
 };
 

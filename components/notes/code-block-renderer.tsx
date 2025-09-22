@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { codeToHtml } from 'shiki';
 
 interface CodeBlockRendererProps {
@@ -111,33 +111,6 @@ export default function CodeBlockRenderer({ htmlContent }: CodeBlockRendererProp
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   );
-}
-
-function getFileExtension(language: string): string {
-  const extensions: Record<string, string> = {
-    typescript: 'ts',
-    javascript: 'js',
-    tsx: 'tsx',
-    jsx: 'jsx',
-    python: 'py',
-    java: 'java',
-    go: 'go',
-    rust: 'rs',
-    php: 'php',
-    ruby: 'rb',
-    swift: 'swift',
-    kotlin: 'kt',
-    dart: 'dart',
-    css: 'css',
-    html: 'html',
-    json: 'json',
-    yaml: 'yml',
-    bash: 'sh',
-    sql: 'sql',
-    markdown: 'md'
-  };
-  
-  return extensions[language] || 'txt';
 }
 
 function escapeHtml(text: string): string {

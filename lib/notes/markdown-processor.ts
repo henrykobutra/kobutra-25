@@ -1,129 +1,17 @@
-import fs from 'fs';
+/**
+ * Main notes processing API
+ * 
+ * This module provides the primary API functions for working with markdown notes,
+ * orchestrating file operations, content transformation, and data aggregation.
+ */
+
 import path from 'path';
-import matter from 'gray-matter';
-import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
-import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify';
-import { unified } from 'unified';
+import type { NoteData, NoteListItem } from '@/lib/types/note-types';
+import { getNoteFiles, parseMarkdownFile, calculateReadingTime } from '@/lib/notes/file-operations';
+import { markdownToHtml } from '@/lib/notes/markdown-transformer';
 
-export interface NoteFrontmatter {
-  order: number;
-  slug: string;
-  title: string;
-  tags: string[];
-  date: string;
-  excerpt: string;
-}
-
-export interface NoteData {
-  frontmatter: NoteFrontmatter;
-  content: string;
-  htmlContent: string;
-}
-
-export interface NoteListItem {
-  frontmatter: NoteFrontmatter;
-  readingTime: number;
-}
-
-const NOTES_DIRECTORY = path.join(process.cwd(), 'content/notes');
-
-/**
- * Get all note files from the content directory
- */
-function getNoteFiles(): string[] {
-  try {
-    if (!fs.existsSync(NOTES_DIRECTORY)) {
-      console.warn(`Notes directory does not exist: ${NOTES_DIRECTORY}`);
-      return [];
-    }
-    
-    const files = fs.readdirSync(NOTES_DIRECTORY)
-      .filter(file => file.endsWith('.md') && file !== 'README.md')
-      .map(file => path.join(NOTES_DIRECTORY, file));
-    
-    return files;
-  } catch (error) {
-    console.error('Error reading notes directory:', error);
-    return [];
-  }
-}
-
-/**
- * Parse markdown file and extract frontmatter
- */
-function parseMarkdownFile(filePath: string): { frontmatter: NoteFrontmatter; content: string } {
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(fileContent);
-  
-  return {
-    frontmatter: data as NoteFrontmatter,
-    content
-  };
-}
-
-/**
- * Convert markdown content to HTML, replacing code blocks with shadcn CodeBlock placeholders
- */
-async function markdownToHtml(markdown: string): Promise<string> {
-  const result = await unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkRehype)
-    .use(() => {
-      return (tree) => {
-        // Find all pre > code elements and replace with shadcn CodeBlock placeholders
-        const visit = (node: any) => {
-          if (node.type === 'element' && node.tagName === 'pre') {
-            const codeNode = node.children?.find((child: any) => 
-              child.type === 'element' && child.tagName === 'code'
-            );
-            
-            if (codeNode) {
-              // Extract language from className
-              const className = codeNode.properties?.className?.[0] || '';
-              const language = className.replace('language-', '') || 'text';
-              
-              // Get the code content
-              const codeContent = codeNode.children?.[0]?.value || '';
-              
-              // Replace with shadcn CodeBlock placeholder
-              node.tagName = 'div';
-              node.properties = {
-                'data-code-block': 'true',
-                'data-language': language,
-                'data-code': codeContent
-              };
-              node.children = [{
-                type: 'text',
-                value: `[CODEBLOCK:${language}]${codeContent}[/CODEBLOCK]`
-              }];
-            }
-          }
-          
-          if (node.children) {
-            node.children.forEach(visit);
-          }
-        };
-        
-        visit(tree);
-      };
-    })
-    .use(rehypeStringify)
-    .process(markdown);
-    
-  return result.toString();
-}
-
-/**
- * Calculate estimated reading time (words per minute)
- */
-function calculateReadingTime(content: string): number {
-  const wordsPerMinute = 200;
-  const wordCount = content.split(/\s+/).length;
-  return Math.ceil(wordCount / wordsPerMinute);
-}
+// Re-export types for backward compatibility
+export type { NoteFrontmatter, NoteData, NoteListItem } from '@/lib/types/note-types';
 
 /**
  * Get all notes for the index page
