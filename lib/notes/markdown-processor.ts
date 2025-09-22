@@ -196,7 +196,6 @@ export async function getAllNoteSlugs(): Promise<string[]> {
       })
       .filter((slug): slug is string => slug !== null);
     
-    console.log(`Generated slugs for static params:`, slugs);
     return slugs;
   } catch (error) {
     console.error('Error in getAllNoteSlugs:', error);

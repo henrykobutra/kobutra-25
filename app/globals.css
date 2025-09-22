@@ -321,15 +321,29 @@
   .code-block-container {
     @apply rounded-xl overflow-hidden border border-border/20;
     margin-top: 1.5rem !important;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     background: oklch(0.08 0 0);
     border-color: oklch(1 0 0 / 12%);
-    box-shadow: 
-      0 2px 8px oklch(0 0 0 / 6%), 
+    box-shadow:
+      0 2px 8px oklch(0 0 0 / 6%),
       0 8px 24px oklch(0 0 0 / 4%),
       0 16px 32px oklch(0 0 0 / 2%);
+  }
+
+  /* Override prose margins for code blocks */
+  .prose .code-block-container {
+    margin-bottom: 0 !important;
+  }
+
+  /* Reduce spacing after code blocks by targeting the next element */
+  .prose .code-block-container + * {
+    margin-top: 0.5rem !important;
+  }
+
+  .prose .code-block-container + p {
+    margin-top: 0.75rem !important;
   }
 
   .code-block-header {
@@ -369,6 +383,7 @@
     @apply m-0 rounded-none border-0;
     background: transparent !important;
     box-shadow: none !important;
+    margin: 0 !important;
   }
 
   .code-block-content .shiki pre {

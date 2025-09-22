@@ -74,7 +74,7 @@ export default function NoteRenderer({ note }: NoteRendererProps) {
         {/* Note content with enhanced code blocks */}
         <motion.article 
           variants={itemVariants}
-          className="prose prose-lg prose-neutral dark:prose-invert max-w-none font-serif [&_*]:font-serif [&_pre]:font-mono [&_code]:font-mono [&_.code-block-container]:!mb-3"
+          className="prose prose-lg prose-neutral dark:prose-invert max-w-none font-serif [&_*]:font-serif [&_pre]:font-mono [&_code]:font-mono [&_.code-block-container]:!mb-0"
         >
           <CodeBlockRenderer htmlContent={note.htmlContent} />
         </motion.article>

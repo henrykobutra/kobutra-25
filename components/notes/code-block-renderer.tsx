@@ -35,7 +35,7 @@ export default function CodeBlockRenderer({ htmlContent }: CodeBlockRendererProp
           // Create the code block container
           const codeBlockContainer = document.createElement('div');
           codeBlockContainer.innerHTML = `
-            <div class="code-block-container" style="margin-bottom: 0.75rem !important;">
+            <div class="code-block-container" style="margin-bottom: 0.25rem !important;">
               <div class="code-block-header">
                 <span class="language-label">${language.toUpperCase()}</span>
                 <button class="copy-button" data-code="${encodeURIComponent(code)}">
@@ -59,7 +59,7 @@ export default function CodeBlockRenderer({ htmlContent }: CodeBlockRendererProp
           // Fallback to plain code block
           const codeBlockContainer = document.createElement('div');
           codeBlockContainer.innerHTML = `
-            <div class="code-block-container" style="margin-bottom: 0.75rem !important;">
+            <div class="code-block-container" style="margin-bottom: 0.25rem !important;">
               <div class="code-block-header">
                 <span class="language-label">${language.toUpperCase()}</span>
                 <button class="copy-button" data-code="${encodeURIComponent(code)}">
