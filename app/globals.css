@@ -573,17 +573,27 @@
     color: rgb(var(--foreground) / 0.8);
   }
 
-  /* Links */
+  /* Links - Medium-style with elegant underlines */
   .prose a {
     color: rgb(var(--primary));
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--primary) / 0.3);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
     font-weight: 500;
+    transition: all 0.2s ease;
   }
 
   .prose a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    color: rgb(var(--primary) / 0.8);
+    text-decoration-color: rgb(var(--primary) / 0.7);
     text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .prose a:active {
+    color: rgb(var(--primary) / 0.9);
+    text-decoration-thickness: 1px;
   }
 
   /* Inline code */
