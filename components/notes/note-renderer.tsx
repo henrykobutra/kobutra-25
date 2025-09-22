@@ -58,11 +58,11 @@ export default function NoteRenderer({ note }: NoteRendererProps) {
 
         {/* Note header */}
         <motion.header variants={itemVariants} className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-light mb-8 leading-[1.1] tracking-tight text-foreground">
+          <h1 className="text-4xl md:text-5xl font-light mb-8 leading-[1.1] tracking-tight text-foreground font-serif">
             {note.frontmatter.title}
           </h1>
           
-          <p className="text-2xl leading-[1.6] text-muted-foreground/90 font-light max-w-2xl">
+          <p className="text-2xl leading-[1.6] text-muted-foreground/90 font-light max-w-2xl font-serif">
             {note.frontmatter.excerpt}
           </p>
           
@@ -73,7 +73,7 @@ export default function NoteRenderer({ note }: NoteRendererProps) {
         {/* Note content */}
         <motion.article 
           variants={itemVariants}
-          className="prose prose-lg prose-neutral dark:prose-invert max-w-none"
+          className="prose prose-lg prose-neutral dark:prose-invert max-w-none font-serif [&_*]:font-serif"
           dangerouslySetInnerHTML={{ __html: note.htmlContent }}
         />
 
