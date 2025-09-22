@@ -43,7 +43,7 @@ const sideProjects: SideProject[] = [
     status: "planning"
   },
   {
-    name: "CRM Platform",
+    name: "CMS Platform",
     description: "Building a better WordPress alternative. Reimagining how content management should work in the modern web ecosystem.",
     status: "exploring"
   },
