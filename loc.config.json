@@ -20,7 +20,8 @@
     "files": [
       "CLAUDE.md",
       "WARP.md",
-      "README.md"
+      "README.md",
+      "app/globals.css"
     ],
     "patterns": [
       ".*\\.test\\.(ts|tsx|js|jsx)$",
