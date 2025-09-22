@@ -15,7 +15,8 @@
       "components/ui",
       "tests",
       "docs",
-      "scripts"
+      "scripts",
+      "content"
     ],
     "files": [
       "CLAUDE.md",
