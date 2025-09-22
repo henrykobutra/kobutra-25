@@ -128,6 +128,8 @@ export default function BottomNavigation() {
                 <motion.button
                   key={item.id}
                   onClick={() => router.push(item.path)}
+                  aria-label={`Navigate to ${item.label} page`}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`relative flex items-center gap-2 px-3 py-2.5 rounded-full cursor-pointer transition-all duration-200 min-w-[82px] justify-center ${
                     isActive
                       ? "text-white font-semibold"

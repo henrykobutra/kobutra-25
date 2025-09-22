@@ -67,6 +67,19 @@ const getStatusColor = (status: string) => {
   }
 };
 
+const getStatusIcon = (status: string) => {
+  switch (status) {
+    case 'building':
+      return '🔨'; // Building/construction
+    case 'exploring':
+      return '🔍'; // Exploring/research
+    case 'planning':
+      return '📋'; // Planning/organizing
+    default:
+      return '•';
+  }
+};
+
 /**
  * Client-side sides page component with animations
  * Handles motion and interactive functionality for the projects page
@@ -132,7 +145,8 @@ export default function SidesClient() {
                     >
                       {project.name}
                     </motion.h3>
-                    <span className={`text-xs font-medium ${getStatusColor(project.status)}`}>
+                    <span className={`text-xs font-medium ${getStatusColor(project.status)} flex items-center gap-1`}>
+                      <span aria-hidden="true">{getStatusIcon(project.status)}</span>
                       {project.status}
                     </span>
                   </div>
