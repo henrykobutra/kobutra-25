@@ -62,36 +62,6 @@ export default function NoteRenderer({ note }: NoteRendererProps) {
             {note.frontmatter.title}
           </h1>
           
-          <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mb-8">
-            <time 
-              dateTime={note.frontmatter.date}
-              className="font-medium"
-            >
-              {new Date(note.frontmatter.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-            
-            {note.frontmatter.tags.length > 0 && (
-              <>
-                <span className="text-border">•</span>
-                <div className="flex gap-3">
-                  {note.frontmatter.tags.map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-3 py-1.5 bg-muted/40 hover:bg-muted/60 rounded-full text-xs font-medium 
-                                 border border-border/30 transition-colors cursor-default"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-          
           <p className="text-2xl leading-[1.6] text-muted-foreground/90 font-light max-w-2xl">
             {note.frontmatter.excerpt}
           </p>
@@ -109,20 +79,14 @@ export default function NoteRenderer({ note }: NoteRendererProps) {
 
         {/* Footer navigation */}
         <motion.footer variants={itemVariants} className="mt-20 pt-12 border-t border-border/50">
-          <div className="flex items-center justify-between">
-            <Link 
-              href="/notes" 
-              className="inline-flex items-center gap-3 px-4 py-2 text-sm text-muted-foreground 
-                         hover:text-foreground hover:bg-muted/50 rounded-lg transition-all duration-200"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to all notes
-            </Link>
-            
-            <div className="text-xs text-muted-foreground/60">
-              {new Date(note.frontmatter.date).getFullYear()} • Henry Kobutra
-            </div>
-          </div>
+          <Link 
+            href="/notes" 
+            className="inline-flex items-center gap-3 px-4 py-2 text-sm text-muted-foreground 
+                       hover:text-foreground hover:bg-muted/50 rounded-lg transition-all duration-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to all notes
+          </Link>
         </motion.footer>
       </div>
     </motion.article>
