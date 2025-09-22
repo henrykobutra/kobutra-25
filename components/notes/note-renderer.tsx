@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import type { NoteData } from '@/lib/notes/markdown-processor';
+import CodeBlockRenderer from './code-block-renderer';
 
 interface NoteRendererProps {
   note: NoteData;
@@ -70,12 +71,13 @@ export default function NoteRenderer({ note }: NoteRendererProps) {
           <div className="mt-12 mb-4 w-16 h-px bg-gradient-to-r from-border to-transparent"></div>
         </motion.header>
 
-        {/* Note content */}
+        {/* Note content with enhanced code blocks */}
         <motion.article 
           variants={itemVariants}
-          className="prose prose-lg prose-neutral dark:prose-invert max-w-none font-serif [&_*]:font-serif"
-          dangerouslySetInnerHTML={{ __html: note.htmlContent }}
-        />
+          className="prose prose-lg prose-neutral dark:prose-invert max-w-none font-serif [&_*]:font-serif [&_pre]:font-mono [&_code]:font-mono [&_.code-block-container]:!mb-3"
+        >
+          <CodeBlockRenderer htmlContent={note.htmlContent} />
+        </motion.article>
 
         {/* Footer navigation */}
         <motion.footer variants={itemVariants} className="mt-20 pt-12 border-t border-border/50">

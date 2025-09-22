@@ -4,7 +4,6 @@ import matter from 'gray-matter';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
-import rehypeShiki from '@shikijs/rehype';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 
@@ -65,42 +64,51 @@ function parseMarkdownFile(filePath: string): { frontmatter: NoteFrontmatter; co
 }
 
 /**
- * Convert markdown content to HTML with Shiki syntax highlighting
+ * Convert markdown content to HTML, replacing code blocks with shadcn CodeBlock placeholders
  */
 async function markdownToHtml(markdown: string): Promise<string> {
   const result = await unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype)
-    .use(rehypeShiki, {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
-      langs: [
-        'typescript',
-        'javascript',
-        'tsx',
-        'jsx',
-        'bash',
-        'json',
-        'yaml',
-        'css',
-        'html',
-        'markdown',
-        'sql',
-        'python',
-        'go',
-        'rust',
-        'java',
-        'php',
-        'ruby',
-        'swift',
-        'kotlin',
-        'dart',
-        'vue',
-        'svelte',
-      ],
+    .use(() => {
+      return (tree) => {
+        // Find all pre > code elements and replace with shadcn CodeBlock placeholders
+        const visit = (node: any) => {
+          if (node.type === 'element' && node.tagName === 'pre') {
+            const codeNode = node.children?.find((child: any) => 
+              child.type === 'element' && child.tagName === 'code'
+            );
+            
+            if (codeNode) {
+              // Extract language from className
+              const className = codeNode.properties?.className?.[0] || '';
+              const language = className.replace('language-', '') || 'text';
+              
+              // Get the code content
+              const codeContent = codeNode.children?.[0]?.value || '';
+              
+              // Replace with shadcn CodeBlock placeholder
+              node.tagName = 'div';
+              node.properties = {
+                'data-code-block': 'true',
+                'data-language': language,
+                'data-code': codeContent
+              };
+              node.children = [{
+                type: 'text',
+                value: `[CODEBLOCK:${language}]${codeContent}[/CODEBLOCK]`
+              }];
+            }
+          }
+          
+          if (node.children) {
+            node.children.forEach(visit);
+          }
+        };
+        
+        visit(tree);
+      };
     })
     .use(rehypeStringify)
     .process(markdown);

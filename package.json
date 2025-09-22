@@ -13,7 +13,10 @@
     "quality": "pnpm lint && pnpm tsc --noEmit && pnpm loc:check && pnpm knip"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.7.0",
+    "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@tabler/icons-react": "^3.35.0",
     "@types/hast": "^3.0.4",
     "clsx": "^2.1.1",
