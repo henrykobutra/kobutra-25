@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import NotesClient from '@/components/notes/notes-client';
+import { getAllNotes } from '@/lib/notes/markdown-processor';
 
 export const metadata: Metadata = {
   title: "Notes & Insights",
@@ -20,6 +21,8 @@ export const metadata: Metadata = {
  * Notes page component for technical insights and observations
  * Server component that handles metadata while delegating client-side functionality to NotesClient.
  */
-export default function NotesPage() {
-  return <NotesClient />;
+export default async function NotesPage() {
+  const notes = await getAllNotes();
+  
+  return <NotesClient notes={notes} />;
 }

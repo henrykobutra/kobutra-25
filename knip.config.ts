@@ -5,6 +5,7 @@ const config: KnipConfig = {
   entry: [
     'app/**/*.{ts,tsx}',
     'components/**/*.{ts,tsx}',
+    'lib/**/*.{ts,tsx}',
     'scripts/**/*.ts',
   ],
   
@@ -12,6 +13,7 @@ const config: KnipConfig = {
   project: [
     'app/**/*.{ts,tsx}',
     'components/**/*.{ts,tsx}',
+    'lib/**/*.{ts,tsx}',
     'scripts/**/*.ts',
   ],
 
@@ -40,6 +42,10 @@ const config: KnipConfig = {
     'eslint-config-next',
     // TailwindCSS is used via PostCSS plugin and CSS imports
     'tailwindcss',
+    // Markdown processing dependencies used in lib/notes
+    '@types/hast',
+    // Shiki is used through @shikijs/rehype plugin
+    'shiki',
   ],
 };
 

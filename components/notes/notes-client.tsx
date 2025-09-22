@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import type { NoteListItem } from '@/lib/notes/markdown-processor';
 
 // Simplified animation variants
 const containerVariants = {
@@ -25,26 +27,15 @@ const itemVariants = {
   }
 };
 
-// Actual note items from development journey
-const noteItems = [
-  "The 200-Line Rule: Keeping Components Focused",
-  "Vibe Coding Philosophy: Quality Over Quantity", 
-  "Automated Quality Gates: My Development Pipeline",
-  "Shadcn Extensions: Beyond the Basics",
-  "MCP Integrations: Supercharging Development Workflow",
-  "Supabase MCP: Direct Database Access for AI Assistants",
-  "Linear MCP: The Ultimate Project Management Integration",
-  "iTerm2 Configuration: Terminal Perfection for Developers",
-  "Claude Code Reviews: AI-Powered Quality Assurance",
-  "macOS Productivity Stack: Stream Deck, Raycast & CleanShot",
-  "AI Coding Trinity: Claude, Windsurf & Warp in Practice"
-];
+interface NotesClientProps {
+  notes: NoteListItem[];
+}
 
 /**
  * Client-side notes page component with animations
  * Handles motion and interactive functionality for the notes page
  */
-export default function NotesClient() {
+export default function NotesClient({ notes }: NotesClientProps) {
   return (
     <motion.div
       className="min-h-screen py-16"
@@ -69,9 +60,9 @@ export default function NotesClient() {
           className="space-y-8"
           variants={containerVariants}
         >
-          {noteItems.map((item, index) => (
+          {notes.map((note) => (
             <motion.li
-              key={index}
+              key={note.frontmatter.slug}
               variants={itemVariants}
               whileHover={{
                 x: 8,
@@ -83,27 +74,60 @@ export default function NotesClient() {
               }}
               className="group"
             >
-              <div className="flex items-center gap-4">
-                <motion.span 
-                  className="text-sm font-mono text-muted-foreground/60 min-w-[2ch]"
-                  whileHover={{
-                    scale: 1.1,
-                    color: "rgb(var(--primary))",
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </motion.span>
-                <motion.span 
-                  className="text-lg text-foreground leading-relaxed"
-                  whileHover={{
-                    color: "rgb(var(--primary))",
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  {item}
-                </motion.span>
-              </div>
+              <Link href={`/notes/${note.frontmatter.slug}`} className="block">
+                <div className="flex items-start gap-4">
+                  <motion.span 
+                    className="text-sm font-mono text-muted-foreground/60 min-w-[3ch] mt-1"
+                    whileHover={{
+                      scale: 1.1,
+                      color: "rgb(var(--primary))",
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    {String(note.frontmatter.order).padStart(3, '0')}
+                  </motion.span>
+                  <div className="flex-1">
+                    <motion.h3 
+                      className="text-lg font-medium text-foreground leading-relaxed mb-2"
+                      whileHover={{
+                        color: "rgb(var(--primary))",
+                        transition: { duration: 0.2 }
+                      }}
+                    >
+                      {note.frontmatter.title}
+                    </motion.h3>
+                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+                      {note.frontmatter.excerpt}
+                    </p>
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground/80">
+                      <span>{note.readingTime} min read</span>
+                      <span>•</span>
+                      <time dateTime={note.frontmatter.date}>
+                        {new Date(note.frontmatter.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </time>
+                      {note.frontmatter.tags.length > 0 && (
+                        <>
+                          <span>•</span>
+                          <div className="flex gap-2">
+                            {note.frontmatter.tags.slice(0, 3).map((tag) => (
+                              <span 
+                                key={tag}
+                                className="px-2 py-1 bg-muted/50 rounded-md text-xs"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </motion.li>
           ))}
         </motion.ul>
