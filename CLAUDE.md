@@ -5,17 +5,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Build and Development
-- `pnpm dev` - Start development server with Turbopack
-- `pnpm build` - Build for production with Turbopack
-- `pnpm start` - Start production server
+- `bun run dev` - Start development server with Turbopack
+- `bun run build` - Build for production with Turbopack
+- `bun run start` - Start production server
 
 ### Code Quality
-- `pnpm lint` - Run ESLint
-- `pnpm quality` - Run complete quality check (lint + typecheck + loc:check + knip)
-- `pnpm tsc --noEmit` - TypeScript type checking only
-- `pnpm knip` - Find unused files, dependencies, and exports
-- `pnpm loc` - Lines of code report
-- `pnpm loc:check` - Check for files exceeding line limits (fails CI if over 200 lines)
+- `bun run lint` - Run ESLint
+- `bun run quality` - Run complete quality check (lint + typecheck + loc:check + knip)
+- `bunx tsc --noEmit` - TypeScript type checking only
+- `bun run knip` - Find unused files, dependencies, and exports
+- `bun run loc` - Lines of code report
+- `bun run loc:check` - Check for files exceeding line limits (fails CI if over 200 lines)
 
 ## Architecture
 

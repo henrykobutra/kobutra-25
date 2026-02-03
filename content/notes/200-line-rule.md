@@ -23,7 +23,7 @@ When files stay under 200 lines, AI assistants can:
 To make this rule practical, I created a comprehensive line-counting script and integrated it into my development workflow. The script uses [tsx](https://tsx.is/) to run TypeScript directly, so you'll need to install it first:
 
 ```bash
-pnpm add -D tsx
+bun add -D tsx
 # or npm install --save-dev tsx
 ```
 
@@ -260,7 +260,7 @@ async function main(): Promise<void> {
     console.log(`
 📊 Lines of Code Counter
 
-Usage: pnpm loc [options]
+Usage: bun run loc [options]
 
 Options:
   --check    Exit with error code if files exceed line limit
@@ -302,12 +302,12 @@ I've integrated this into my package.json workflow:
   "scripts": {
     "loc": "tsx scripts/loc.ts",
     "loc:check": "tsx scripts/loc.ts --check",
-    "quality": "pnpm lint && pnpm tsc --noEmit && pnpm loc:check && pnpm knip"
+    "quality": "bun run lint && bunx tsc --noEmit && bun run loc:check && bun run knip"
   }
 }
 ```
 
-Now I can simply tell coding assistants: "run `pnpm quality`" and let the automated checks guide the refactoring process.
+Now I can simply tell coding assistants: "run `bun run quality`" and let the automated checks guide the refactoring process.
 
 ## Real-World Benefits and Trade-offs
 

@@ -10,7 +10,7 @@
     "knip": "knip",
     "loc": "tsx scripts/loc.ts",
     "loc:check": "tsx scripts/loc.ts --check",
-    "quality": "pnpm lint && pnpm tsc --noEmit && pnpm loc:check && pnpm knip"
+    "quality": "bun run lint && bunx tsc --noEmit && bun run loc:check && bun run knip"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.7.0",
@@ -50,5 +50,8 @@
     "shiki": "^3.13.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "trustedDependencies": [
+    "unrs-resolver"
+  ]
 }

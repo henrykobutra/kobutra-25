@@ -228,7 +228,7 @@ async function main(): Promise<void> {
     console.log(`
 📊 Lines of Code Counter
 
-Usage: pnpm loc [options]
+Usage: bun run loc [options]
 
 Options:
   --check    Exit with error code if files exceed line limit

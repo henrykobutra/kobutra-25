@@ -9,7 +9,7 @@ excerpt: "How I use automated quality gates to maintain code standards without s
 
 # Automated Quality Gates: My Development Pipeline
 
-Quality shouldn't be a manual process. After years of debugging issues that could have been caught earlier, I've built a comprehensive quality pipeline that runs with a single command: `pnpm quality`.
+Quality shouldn't be a manual process. After years of debugging issues that could have been caught earlier, I've built a comprehensive quality pipeline that runs with a single command: `bun run quality`.
 
 This isn't just about catching bugs—it's about creating a development environment where quality is automatic, not accidental.
 
@@ -24,7 +24,7 @@ Here's my actual `package.json` setup that powers the entire quality system:
     "knip": "knip", 
     "loc": "tsx scripts/loc.ts",
     "loc:check": "tsx scripts/loc.ts --check",
-    "quality": "pnpm lint && pnpm tsc --noEmit && pnpm loc:check && pnpm knip"
+    "quality": "bun run lint && bunx tsc --noEmit && bun run loc:check && bun run knip"
   },
   "dependencies": {
     "knip": "^5.63.1",
@@ -82,7 +82,7 @@ Running `tsc --noEmit` performs a full type check without generating JavaScript 
 
 ```bash
 # The actual command from my quality pipeline
-pnpm tsc --noEmit
+bunx tsc --noEmit
 ```
 
 With TypeScript 5 and strict mode enabled, this catches issues that would otherwise become runtime errors:
@@ -187,7 +187,7 @@ Knip runs last because it's the most comprehensive—it analyzes the entire depe
 
 ### Development Workflow Integration
 
-I run `pnpm quality` at three key points:
+I run `bun run quality` at three key points:
 
 1. **Before commits**: Catches issues early in development
 2. **During code review**: Ensures PR quality
@@ -196,7 +196,7 @@ I run `pnpm quality` at three key points:
 ```bash
 # My typical development flow
 git add .
-pnpm quality  # Run before committing
+bun run quality  # Run before committing
 git commit -m "feat: add new component"
 ```
 
@@ -212,15 +212,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
         with:
           version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm quality
+          cache: 'bun'
+      - run: bun install --frozen-lockfile
+      - run: bun run quality
 ```
 
 ### Performance Optimization
@@ -237,7 +237,7 @@ The pipeline runs in about 15-30 seconds on my codebase:
 
 Key optimizations:
 - **Sequential execution**: Fail fast on first error
-- **Cached dependencies**: pnpm's efficient caching
+- **Cached dependencies**: bun's efficient caching
 - **Incremental TypeScript**: Only checks changed files in watch mode
 
 ## Real-World Impact
@@ -264,21 +264,21 @@ After 6 months of using this quality pipeline, the results speak for themselves:
 // Week 1: Basic safety net
 {
   "scripts": {
-    "quality:basic": "pnpm lint && pnpm tsc --noEmit"
+    "quality:basic": "bun run lint && bunx tsc --noEmit"
   }
 }
 
 // Week 2: Add complexity control
 {
   "scripts": {
-    "quality": "pnpm lint && pnpm tsc --noEmit && pnpm loc:check"
+    "quality": "bun run lint && bunx tsc --noEmit && bun run loc:check"
   }
 }
 
 // Week 3: Full pipeline
 {
   "scripts": {
-    "quality": "pnpm lint && pnpm tsc --noEmit && pnpm loc:check && pnpm knip"
+    "quality": "bun run lint && bunx tsc --noEmit && bun run loc:check && bun run knip"
   }
 }
 ```
@@ -287,10 +287,10 @@ After 6 months of using this quality pipeline, the results speak for themselves:
 
 ```bash
 # Core quality tools
-pnpm add -D eslint typescript tsx knip
+bun add -D eslint typescript tsx knip
 
 # Framework-specific (for Next.js)
-pnpm add -D eslint-config-next @eslint/eslintrc
+bun add -D eslint-config-next @eslint/eslintrc
 ```
 
 ## Lessons Learned and Trade-offs
