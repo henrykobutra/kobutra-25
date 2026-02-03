@@ -6,6 +6,7 @@ import StructuredData from "@/components/seo/structured-data";
 import PerformanceOptimizer from "@/components/seo/performance-optimizer";
 import SocialProfileSchema from "@/components/seo/social-profile-schema";
 import WebPageSchema from "@/components/seo/webpage-schema";
+import ThemeToggle from "@/components/ui/theme-toggle";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -96,14 +97,29 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitScript = `
+(() => {
+  try {
+    const storageKey = "theme";
+    const root = document.documentElement;
+    const stored = localStorage.getItem(storageKey);
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = stored === "dark" || stored === "light" ? stored : (prefersDark ? "dark" : "light");
+    root.classList.toggle("dark", theme === "dark");
+    root.style.colorScheme = theme;
+  } catch {}
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <StructuredData />
         <SocialProfileSchema />
         <WebPageSchema />
@@ -113,6 +129,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <BreadcrumbWrapper />
+        <ThemeToggle />
         {children}
         <BottomNavigation />
       </body>

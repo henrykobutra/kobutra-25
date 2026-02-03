@@ -142,7 +142,7 @@ export default function CertificationBadges() {
 
             {/* Badge Name */}
             <motion.div
-              className="text-xs text-center text-gray-700 leading-tight"
+              className="text-xs text-center text-muted-foreground leading-tight"
               whileHover={{ color: '#374151' }}
             >
               {cert.name}
@@ -162,7 +162,7 @@ export default function CertificationBadges() {
 
       {/* Subtle snarky text with typing animation */}
       <motion.p
-        className="text-xs text-gray-500 mt-4 italic"
+        className="text-xs text-muted-foreground mt-4 italic"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

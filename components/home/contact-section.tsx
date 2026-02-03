@@ -10,16 +10,16 @@ export default function ContactSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="text-gray-700 mb-4">henry@kobutra.com</p>
-            <p className="text-gray-700 mb-4">
+            <p className="text-muted-foreground mb-4">henry@kobutra.com</p>
+            <p className="text-muted-foreground mb-4">
               <a href="https://linkedin.com/in/henrykobutra" className="hover:underline">LinkedIn</a> • 
               <a href="https://github.com/henrykobutra" className="hover:underline"> GitHub</a>
             </p>
-            <p className="text-gray-700">Greater Houston, Texas • AI5OE</p>
+            <p className="text-muted-foreground">Greater Houston, Texas • AI5OE</p>
           </div>
 
           <div>
-            <p className="text-gray-700">
+            <p className="text-muted-foreground">
               Building at Redii. Available for strategic consulting. Always up for technical discussions.
             </p>
           </div>

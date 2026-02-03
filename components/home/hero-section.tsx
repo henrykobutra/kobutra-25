@@ -94,7 +94,7 @@ export default function HeroSection() {
             </motion.h1>
 
             <motion.p
-              className="text-lg text-gray-600 mb-8"
+              className="text-lg text-muted-foreground mb-8"
               variants={subtitleVariants}
               initial="hidden"
               animate="visible"
@@ -103,7 +103,7 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.div
-              className="text-sm text-gray-600 leading-relaxed"
+              className="text-sm text-muted-foreground leading-relaxed"
               variants={descriptionVariants}
               initial="hidden"
               animate="visible"

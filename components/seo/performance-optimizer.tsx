@@ -96,7 +96,8 @@ export default function PerformanceOptimizer() {
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       
       {/* Theme color for mobile browsers */}
-      <meta name="theme-color" content="#ffffff" />
+      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b" />
       <meta name="msapplication-TileColor" content="#ffffff" />
       
       {/* Prevent automatic phone number detection */}
