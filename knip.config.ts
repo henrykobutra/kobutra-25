@@ -38,8 +38,6 @@ const config: KnipConfig = {
 
   // Ignore certain dependencies that are used but not directly imported
   ignoreDependencies: [
-    // ESLint configs are used via extends
-    'eslint-config-next',
     // TailwindCSS is used via PostCSS plugin and CSS imports
     'tailwindcss',
     // Markdown processing dependencies used in lib/notes
