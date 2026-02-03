@@ -7,7 +7,7 @@ const STORAGE_KEY = "theme";
 
 type ThemePreference = "light" | "dark" | "system";
 
-const preferenceOrder: ThemePreference[] = ["light", "dark", "system"];
+const preferenceOrder: ThemePreference[] = ["system", "light", "dark"];
 
 function getSystemTheme(): "light" | "dark" {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -90,10 +90,12 @@ export default function ThemeToggle() {
         onClick={toggleTheme}
         aria-label={buttonLabel}
         title={buttonLabel}
-        className="group inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/25 px-3 py-2 text-xs font-semibold tracking-wide text-gray-900 shadow-lg backdrop-blur-xl transition hover:scale-[1.02] hover:bg-white/40 focus-visible:outline-none dark:border-white/10 dark:bg-black/40 dark:text-white"
+        className="group relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-white/10 text-gray-900 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition hover:scale-[1.03] hover:bg-white/20 focus-visible:outline-none dark:border-white/10 dark:bg-black/40 dark:text-white"
       >
         <Icon size={16} className="transition-transform group-hover:-rotate-12" />
-        <span>{activeLabel}</span>
+        <span className="pointer-events-none absolute top-full mt-2 whitespace-nowrap rounded-full border border-black/10 bg-white/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-800 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 dark:border-white/10 dark:bg-black/80 dark:text-white">
+          {activeLabel}
+        </span>
       </button>
     </div>
   );
