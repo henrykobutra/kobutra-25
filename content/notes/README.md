@@ -42,8 +42,8 @@ interface User {
 
 ```bash
 # Bash example
-pnpm install
-pnpm dev
+bun install
+bun run dev
 ```
 
 ## Adding New Notes

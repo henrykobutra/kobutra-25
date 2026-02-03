@@ -125,21 +125,21 @@ trigger: always_on
 - Use Geist font family (sans and mono variants)
 
 ## Development Commands Integration
-- Use `pnpm quality` for all quality checks (lint, typecheck, line count, unused code)
+- Use `bun run quality` for all quality checks (lint, typecheck, line count, unused code)
 ```
 
 **Why this works**: AI assistants can get confused between different Next.js patterns (Pages Router vs App Router). This rule eliminates ambiguity and ensures consistent modern patterns.
 
 ## The Automation Layer: Quality Workflows
 
-The real power comes from automating quality checks. My `pnpm quality` command runs:
+The real power comes from automating quality checks. My `bun run quality` command runs:
 
 ```bash
 # Integrated quality pipeline
-pnpm lint          # ESLint catches style issues
-pnpm tsc --noEmit  # TypeScript catches type errors  
-pnpm loc:check     # Custom tool enforces 200-line rule
-pnpm knip          # Detects unused code
+bun run lint          # ESLint catches style issues
+bunx tsc --noEmit     # TypeScript catches type errors  
+bun run loc:check     # Custom tool enforces 200-line rule
+bun run knip          # Detects unused code
 ```
 
 This creates a feedback loop where AI assistants can immediately see if their suggestions break quality standards.
@@ -154,7 +154,7 @@ description: Cleaning up code before commit
 auto_execution_mode: 3
 ---
 
-Make all the code pass `pnpm quality`. All code adjustments should 
+Make all the code pass `bun run quality`. All code adjustments should 
 strictly follow our coding standards. Do not use type of `any`, do not 
 introduce eslint exceptions, and do not introduce cheap workarounds. 
 Properly breakdown code, organize it well, and don't skimp on JSDocs.
@@ -167,7 +167,7 @@ Properly breakdown code, organize it well, and don't skimp on JSDocs.
 - **Documentation requirement**: Forces proper JSDoc comments on all functions
 
 **Real-world usage**: When I'm ready to commit code, I simply type `/code-cleanup` and Windsurf automatically:
-1. Runs `pnpm quality` to identify issues
+1. Runs `bun run quality` to identify issues
 2. Fixes ESLint violations
 3. Resolves TypeScript errors
 4. Breaks down oversized files
@@ -249,7 +249,7 @@ lib/auth/
 - Domain-driven organization
 
 **Workflow Integration**:
-- `pnpm quality` passes on first run
+- `bun run quality` passes on first run
 - No manual cleanup needed
 - Ready for commit immediately
 
