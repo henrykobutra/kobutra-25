@@ -31,9 +31,9 @@ const certifications: CertificationBadge[] = [
     alt: 'TCM Security Practical Network Penetration Tester'
   },
   {
-    name: 'ISC² CC',
-    image: '/images/certifications/isc2-cc-badge.png',
-    alt: 'ISC² Certified in Cybersecurity'
+    name: 'PMI PMP',
+    image: '/images/certifications/pmp-badge.png',
+    alt: 'Project Management Professional (PMP)'
   },
   {
     name: 'Forrester CX Pro',
