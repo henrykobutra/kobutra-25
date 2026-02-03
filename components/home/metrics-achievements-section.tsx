@@ -14,27 +14,27 @@ export default function MetricsAchievementsSection() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
           <div>
             <div className="text-lg font-medium">15+</div>
-            <div className="text-sm text-gray-600">Years of Technical Leadership</div>
+            <div className="text-sm text-muted-foreground">Years of Technical Leadership</div>
           </div>
           <div>
             <div className="text-lg font-medium">3</div>
-            <div className="text-sm text-gray-600">Languages Spoken Fluently</div>
+            <div className="text-sm text-muted-foreground">Languages Spoken Fluently</div>
           </div>
           <div>
             <div className="text-lg font-medium">90%</div>
-            <div className="text-sm text-gray-600">Cost Reduction with AI</div>
+            <div className="text-sm text-muted-foreground">Cost Reduction with AI</div>
           </div>
           <div>
             <div className="text-lg font-medium">$5M+</div>
-            <div className="text-sm text-gray-600">Digital Transformation Budgets</div>
+            <div className="text-sm text-muted-foreground">Digital Transformation Budgets</div>
           </div>
           <div>
             <div className="text-lg font-medium">180%</div>
-            <div className="text-sm text-gray-600">User Engagement Growth</div>
+            <div className="text-sm text-muted-foreground">User Engagement Growth</div>
           </div>
           <div>
             <div className="text-lg font-medium">10K+</div>
-            <div className="text-sm text-gray-600">Users on AI Products Built</div>
+            <div className="text-sm text-muted-foreground">Users on AI Products Built</div>
           </div>
         </div>
 

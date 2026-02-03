@@ -69,7 +69,7 @@ export default function ProminentPhoto({ src, alt, caption }: ProminentPhotoProp
 
         {caption && (
           <motion.p
-            className="text-sm text-gray-600 mt-3 text-center italic"
+            className="text-sm text-muted-foreground mt-3 text-center italic"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

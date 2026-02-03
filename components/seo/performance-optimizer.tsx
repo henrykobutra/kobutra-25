@@ -11,6 +11,7 @@ export default function PerformanceOptimizer() {
     // Preload critical resources
     const preloadResources = [
       { href: '/images/common/h-logo-orange-glass.png', as: 'image' },
+      { href: '/images/common/h-dot-transparent.png', as: 'image' },
       { href: '/images/photos/henry_making_youtube.jpg', as: 'image' },
     ];
 
@@ -83,6 +84,12 @@ export default function PerformanceOptimizer() {
       />
       <link 
         rel="preload" 
+        href="/images/common/h-dot-transparent.png" 
+        as="image"
+        type="image/png"
+      />
+      <link 
+        rel="preload" 
         href="/images/photos/henry_making_youtube.jpg" 
         as="image"
         type="image/jpeg"
@@ -96,7 +103,8 @@ export default function PerformanceOptimizer() {
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       
       {/* Theme color for mobile browsers */}
-      <meta name="theme-color" content="#ffffff" />
+      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b" />
       <meta name="msapplication-TileColor" content="#ffffff" />
       
       {/* Prevent automatic phone number detection */}

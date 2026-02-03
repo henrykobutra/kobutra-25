@@ -31,9 +31,9 @@ const certifications: CertificationBadge[] = [
     alt: 'TCM Security Practical Network Penetration Tester'
   },
   {
-    name: 'ISC² CC',
-    image: '/images/certifications/isc2-cc-badge.png',
-    alt: 'ISC² Certified in Cybersecurity'
+    name: 'PMI PMP',
+    image: '/images/certifications/pmp-badge.png',
+    alt: 'Project Management Professional (PMP)'
   },
   {
     name: 'Forrester CX Pro',
@@ -110,7 +110,7 @@ export default function CertificationBadges() {
               transition: { duration: 0.2 }
             }}
             whileTap={{ scale: 0.95 }}
-            className="group relative flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
+            className="group relative flex flex-col items-center p-3 rounded-lg transition-colors duration-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5"
           >
             {/* Badge Image Container */}
             <motion.div
@@ -141,16 +141,13 @@ export default function CertificationBadges() {
             </motion.div>
 
             {/* Badge Name */}
-            <motion.div
-              className="text-xs text-center text-gray-700 leading-tight"
-              whileHover={{ color: '#374151' }}
-            >
+            <motion.div className="text-xs text-center text-muted-foreground leading-tight transition-colors group-hover:text-foreground">
               {cert.name}
             </motion.div>
 
             {/* Hover tooltip */}
             <motion.div
-              className="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10"
+              className="absolute -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10 dark:bg-white/90 dark:text-gray-900"
               initial={{ scale: 0.8 }}
               whileHover={{ scale: 1 }}
             >
@@ -162,7 +159,7 @@ export default function CertificationBadges() {
 
       {/* Subtle snarky text with typing animation */}
       <motion.p
-        className="text-xs text-gray-500 mt-4 italic"
+        className="text-xs text-muted-foreground mt-4 italic"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

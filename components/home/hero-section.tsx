@@ -94,7 +94,7 @@ export default function HeroSection() {
             </motion.h1>
 
             <motion.p
-              className="text-lg text-gray-600 mb-8"
+              className="text-lg text-muted-foreground mb-8"
               variants={subtitleVariants}
               initial="hidden"
               animate="visible"
@@ -103,7 +103,7 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.div
-              className="text-sm text-gray-600 leading-relaxed"
+              className="text-sm text-muted-foreground leading-relaxed"
               variants={descriptionVariants}
               initial="hidden"
               animate="visible"
@@ -167,7 +167,15 @@ export default function HeroSection() {
                     width={1200}
                     height={1200}
                     priority
-                    className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[60rem] lg:h-[60rem] object-contain opacity-30 sm:opacity-40 md:opacity-60 lg:opacity-100"
+                    className="block dark:hidden w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[60rem] lg:h-[60rem] object-contain opacity-30 sm:opacity-40 md:opacity-60 lg:opacity-100"
+                  />
+                  <Image
+                    src="/images/common/h-dot-transparent.png"
+                    alt="Henry Kobutra Logo"
+                    width={1200}
+                    height={1200}
+                    priority
+                    className="hidden dark:block w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[60rem] lg:h-[60rem] object-contain opacity-30 sm:opacity-40 md:opacity-60 lg:opacity-100"
                   />
                 </motion.div>
               </motion.div>

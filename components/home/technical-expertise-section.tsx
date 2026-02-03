@@ -11,22 +11,22 @@ export default function TechnicalExpertiseSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
             <h3 className="font-medium mb-2">Frontend</h3>
-            <p className="text-gray-700">Next.js 15, React 18+, TypeScript, Tailwind CSS v4, Framer Motion</p>
+            <p className="text-muted-foreground">Next.js 15, React 18+, TypeScript, Tailwind CSS v4, Framer Motion</p>
           </div>
 
           <div>
             <h3 className="font-medium mb-2">Backend & Infrastructure</h3>
-            <p className="text-gray-700">Node.js/TypeScript, Supabase, PostgreSQL, AWS, Docker & Kubernetes</p>
+            <p className="text-muted-foreground">Node.js/TypeScript, Supabase, PostgreSQL, AWS, Docker & Kubernetes</p>
           </div>
 
           <div>
             <h3 className="font-medium mb-2">AI/ML & Data</h3>
-            <p className="text-gray-700">Modern LLMs, LangChain, Python, PostHog, Data pipeline architecture</p>
+            <p className="text-muted-foreground">Modern LLMs, LangChain, Python, PostHog, Data pipeline architecture</p>
           </div>
 
           <div>
             <h3 className="font-medium mb-2">Security & DevOps</h3>
-            <p className="text-gray-700">Penetration testing, Ethical hacking, CI/CD pipelines, Security auditing</p>
+            <p className="text-muted-foreground">Penetration testing, Ethical hacking, CI/CD pipelines, Security auditing</p>
           </div>
         </div>
       </div>
