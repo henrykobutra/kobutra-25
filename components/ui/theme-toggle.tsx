@@ -1,57 +1,86 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { IconMoon, IconSun } from "@tabler/icons-react";
+import { useEffect, useRef, useState } from "react";
+import { IconDeviceLaptop, IconMoon, IconSun } from "@tabler/icons-react";
 
 const STORAGE_KEY = "theme";
 
-type Theme = "light" | "dark";
+type ThemePreference = "light" | "dark" | "system";
 
-function applyTheme(theme: Theme) {
+const preferenceOrder: ThemePreference[] = ["light", "dark", "system"];
+
+function getSystemTheme(): "light" | "dark" {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(preference: ThemePreference) {
   const root = document.documentElement;
-  root.classList.toggle("dark", theme === "dark");
-  root.style.colorScheme = theme;
+  const resolvedTheme = preference === "system" ? getSystemTheme() : preference;
+  root.classList.toggle("dark", resolvedTheme === "dark");
+  root.style.colorScheme = resolvedTheme;
+  root.dataset.theme = preference;
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [preference, setPreference] = useState<ThemePreference>("system");
+  const preferenceRef = useRef<ThemePreference>("system");
+  const transitionTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const root = document.documentElement;
     const stored = localStorage.getItem(STORAGE_KEY);
-    const hasStoredPreference = stored === "light" || stored === "dark";
-    const initialTheme: Theme = hasStoredPreference
-      ? (stored as Theme)
-      : root.classList.contains("dark")
-        ? "dark"
-        : "light";
+    const isValidPreference =
+      stored === "light" || stored === "dark" || stored === "system";
+    const initialPreference: ThemePreference = isValidPreference
+      ? (stored as ThemePreference)
+      : "system";
 
-    setTheme(initialTheme);
-    applyTheme(initialTheme);
+    preferenceRef.current = initialPreference;
+    setPreference(initialPreference);
+    applyTheme(initialPreference);
 
-    if (!hasStoredPreference) {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleChange = (event: MediaQueryListEvent) => {
-        const nextTheme: Theme = event.matches ? "dark" : "light";
-        setTheme(nextTheme);
-        applyTheme(nextTheme);
-      };
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (preferenceRef.current === "system") {
+        applyTheme("system");
+      }
+    };
 
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  const isDark = theme === "dark";
-  const nextLabel = isDark ? "Light" : "Night";
-  const buttonLabel = isDark ? "Switch to light mode" : "Switch to night mode";
-  const Icon = isDark ? IconSun : IconMoon;
+  const activeLabel =
+    preference === "dark" ? "Night" : preference === "light" ? "Light" : "System";
+  const nextPreference =
+    preferenceOrder[(preferenceOrder.indexOf(preference) + 1) % preferenceOrder.length];
+  const nextLabel =
+    nextPreference === "dark" ? "Night" : nextPreference === "light" ? "Light" : "System";
+  const buttonLabel = `Switch to ${nextLabel.toLowerCase()} mode`;
+  const Icon =
+    preference === "dark"
+      ? IconSun
+      : preference === "light"
+        ? IconMoon
+        : IconDeviceLaptop;
 
   const toggleTheme = () => {
-    const nextTheme: Theme = isDark ? "light" : "dark";
-    localStorage.setItem(STORAGE_KEY, nextTheme);
-    setTheme(nextTheme);
-    applyTheme(nextTheme);
+    const root = document.documentElement;
+    if (transitionTimerRef.current) {
+      window.clearTimeout(transitionTimerRef.current);
+    }
+    root.classList.add("theme-transition");
+    transitionTimerRef.current = window.setTimeout(() => {
+      root.classList.remove("theme-transition");
+      transitionTimerRef.current = null;
+    }, 350);
+
+    const nextPreference =
+      preferenceOrder[(preferenceOrder.indexOf(preferenceRef.current) + 1) % preferenceOrder.length];
+    localStorage.setItem(STORAGE_KEY, nextPreference);
+    preferenceRef.current = nextPreference;
+    setPreference(nextPreference);
+    applyTheme(nextPreference);
   };
 
   return (
@@ -59,13 +88,12 @@ export default function ThemeToggle() {
       <button
         type="button"
         onClick={toggleTheme}
-        aria-pressed={isDark}
         aria-label={buttonLabel}
         title={buttonLabel}
         className="group inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/25 px-3 py-2 text-xs font-semibold tracking-wide text-gray-900 shadow-lg backdrop-blur-xl transition hover:scale-[1.02] hover:bg-white/40 focus-visible:outline-none dark:border-white/10 dark:bg-black/40 dark:text-white"
       >
         <Icon size={16} className="transition-transform group-hover:-rotate-12" />
-        <span>{nextLabel}</span>
+        <span>{activeLabel}</span>
       </button>
     </div>
   );

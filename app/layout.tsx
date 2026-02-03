@@ -104,9 +104,13 @@ const themeInitScript = `
     const root = document.documentElement;
     const stored = localStorage.getItem(storageKey);
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const theme = stored === "dark" || stored === "light" ? stored : (prefersDark ? "dark" : "light");
+    const preference = stored === "dark" || stored === "light" || stored === "system"
+      ? stored
+      : "system";
+    const theme = preference === "system" ? (prefersDark ? "dark" : "light") : preference;
     root.classList.toggle("dark", theme === "dark");
     root.style.colorScheme = theme;
+    root.dataset.theme = preference;
   } catch {}
 })();
 `;

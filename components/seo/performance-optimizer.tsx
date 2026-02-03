@@ -11,6 +11,7 @@ export default function PerformanceOptimizer() {
     // Preload critical resources
     const preloadResources = [
       { href: '/images/common/h-logo-orange-glass.png', as: 'image' },
+      { href: '/images/common/h-dot-transparent.png', as: 'image' },
       { href: '/images/photos/henry_making_youtube.jpg', as: 'image' },
     ];
 
@@ -78,6 +79,12 @@ export default function PerformanceOptimizer() {
       <link 
         rel="preload" 
         href="/images/common/h-logo-orange-glass.png" 
+        as="image"
+        type="image/png"
+      />
+      <link 
+        rel="preload" 
+        href="/images/common/h-dot-transparent.png" 
         as="image"
         type="image/png"
       />
