@@ -58,13 +58,19 @@ const logoVariants = {
   }
 };
 
+const floatEase: [number, number, number, number] = [0.42, 0, 0.58, 1];
+
 const floatingAnimation = {
-  y: [-10, 10, -10],
-  rotate: [-2, 2, -2],
+  x: [0, 6, -4, 3, 0],
+  y: [-6, 2, 8, -3, -6],
+  rotate: [-1.2, 0.6, -0.4, 1.1, -1.2],
+  scale: [1, 1.008, 0.996, 1.004, 1],
   transition: {
-    duration: 6,
     repeat: Infinity,
-    repeatType: "reverse" as const
+    x: { duration: 18, times: [0, 0.3, 0.55, 0.8, 1], ease: floatEase },
+    y: { duration: 22, times: [0, 0.2, 0.5, 0.75, 1], ease: floatEase },
+    rotate: { duration: 26, times: [0, 0.35, 0.6, 0.85, 1], ease: floatEase },
+    scale: { duration: 20, times: [0, 0.4, 0.65, 0.85, 1], ease: floatEase }
   }
 };
 
@@ -162,20 +168,12 @@ export default function HeroSection() {
                   animate={floatingAnimation}
                 >
                   <Image
-                    src="/images/common/h-logo-orange-glass.png"
-                    alt="Henry Kobutra Logo"
-                    width={1200}
-                    height={1200}
-                    priority
-                    className="block dark:hidden w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[60rem] lg:h-[60rem] object-contain opacity-30 sm:opacity-40 md:opacity-60 lg:opacity-100"
-                  />
-                  <Image
                     src="/images/common/h-dot-transparent.png"
                     alt="Henry Kobutra Logo"
                     width={1200}
                     height={1200}
                     priority
-                    className="hidden dark:block w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[60rem] lg:h-[60rem] object-contain opacity-30 sm:opacity-40 md:opacity-60 lg:opacity-100"
+                    className="block w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[60rem] lg:h-[60rem] object-contain opacity-30 sm:opacity-40 md:opacity-60 lg:opacity-100"
                   />
                 </motion.div>
               </motion.div>

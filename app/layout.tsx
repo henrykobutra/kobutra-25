@@ -103,13 +103,13 @@ const themeInitScript = `
     const storageKey = "theme";
     const root = document.documentElement;
     const stored = localStorage.getItem(storageKey);
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const preference = stored === "dark" || stored === "light" || stored === "system"
-      ? stored
-      : "system";
-    const theme = preference === "system" ? (prefersDark ? "dark" : "light") : preference;
-    root.classList.toggle("dark", theme === "dark");
-    root.style.colorScheme = theme;
+    const isValid = stored === "dark" || stored === "light";
+    const preference = isValid ? stored : "light";
+    if (!isValid) {
+      localStorage.setItem(storageKey, preference);
+    }
+    root.classList.toggle("dark", preference === "dark");
+    root.style.colorScheme = preference;
     root.dataset.theme = preference;
   } catch {}
 })();
