@@ -59,12 +59,17 @@ const logoVariants = {
 };
 
 const floatingAnimation = {
-  y: [-10, 10, -10],
-  rotate: [-2, 2, -2],
+  x: [0, 6, -4, 3, 0],
+  y: [-6, 2, 8, -3, -6],
+  rotate: [-1.2, 0.6, -0.4, 1.1, -1.2],
+  scale: [1, 1.008, 0.996, 1.004, 1],
   transition: {
-    duration: 6,
     repeat: Infinity,
-    repeatType: "reverse" as const
+    ease: "easeInOut",
+    x: { duration: 18, times: [0, 0.3, 0.55, 0.8, 1] },
+    y: { duration: 22, times: [0, 0.2, 0.5, 0.75, 1] },
+    rotate: { duration: 26, times: [0, 0.35, 0.6, 0.85, 1] },
+    scale: { duration: 20, times: [0, 0.4, 0.65, 0.85, 1] }
   }
 };
 
